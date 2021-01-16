@@ -67,6 +67,7 @@
     background-position: center;
     z-index: -1;
   }
+  
   .movie-item__info-container {
     padding: 20px 10px;
     height: 100%;
@@ -81,7 +82,7 @@
     font-size: 18px;
     color: white;
   }
-
+  
   .movie-item__info-year {
     font-size: 14px;
     color: white;
@@ -91,5 +92,5 @@
     opacity: 1;
     background-color: rgba(0, 0, 0, .7);
   }
-  
+
 </style>

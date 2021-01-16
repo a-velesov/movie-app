@@ -2,6 +2,12 @@
   <div id="app">
     <PosterBg :poster="posterBg" />
     <MoviesList :list="moviesList" @changePoster="onChangePoster" />
+    <MoviesPagination
+      :current-page="currentPage"
+      :per-page="moviesPerPage"
+      :total="moviesLength"
+      @pageChanged="onPageChanged"
+    />
   </div>
 </template>
 
@@ -9,24 +15,29 @@
   import { mapActions, mapGetters } from 'vuex';
   import MoviesList from '@/components/MoviesList';
   import PosterBg from '@/components/PosterBg';
+  import MoviesPagination from '@/components/MoviesPagination';
 
   export default {
     name: 'App',
     components: {
+      MoviesPagination,
       PosterBg,
       MoviesList,
     },
     data: () => ({
-      posterBg: ''
-  }),
+      posterBg: '',
+    }),
     computed: {
-      ...mapGetters('moviesStore', [ 'moviesList' ]),
+      ...mapGetters('moviesStore', [ 'moviesList', 'currentPage', 'moviesPerPage', 'moviesLength' ]),
     },
     methods: {
-      ...mapActions('moviesStore', [ 'fetchMovies' ]),
+      ...mapActions('moviesStore', [ 'changeCurrentPage' ]),
       onChangePoster(poster) {
         this.posterBg = poster;
-      }
+      },
+      onPageChanged(page) {
+        this.changeCurrentPage(page);
+      },
     },
   };
 </script>
@@ -38,7 +49,6 @@
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
-    margin-top: 60px;
     position: relative;
   }
 </style>
