@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <PosterBg :poster="posterBg" />
+    <Header />
     <MoviesList :list="moviesList" @changePoster="onChangePoster" />
     <MoviesPagination
       :current-page="currentPage"
@@ -16,10 +17,12 @@
   import MoviesList from '@/components/MoviesList';
   import PosterBg from '@/components/PosterBg';
   import MoviesPagination from '@/components/MoviesPagination';
+  import Header from '@/components/Header';
 
   export default {
     name: 'App',
     components: {
+      Header,
       MoviesPagination,
       PosterBg,
       MoviesList,

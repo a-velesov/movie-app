@@ -1,6 +1,6 @@
 <template>
   <BContainer>
-    <h3 class="list-title">IMDB TOP-250</h3>
+    <h3 class="list-title">{{ listTitle }}</h3>
     <BRow>
       <template>
         <BCol cols="3" v-for="(movie, key) in list" :key="key">
@@ -13,7 +13,7 @@
 
 <script>
   import MovieItem from '@/components/MovieItem';
-  import { mapActions } from 'vuex';
+  import { mapActions, mapGetters } from 'vuex';
 
   export default {
     name: 'MoviesList',
@@ -22,6 +22,13 @@
       list: {
         type: Object,
         default: () => ({}),
+      },
+    },
+    computed: {
+      ...mapGetters('moviesStore', ['isSearchBool']),
+      listTitle() {
+        console.log(this.isSearchBool, 'this.isSearch');
+      return this.isSearchBool ? 'SEARCH RESULT' : 'IMDB TOP-250';
       },
     },
     methods: {
