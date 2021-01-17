@@ -1,6 +1,10 @@
 <template>
   <div class="movie-item mb-3">
-    <div class="movie-item__poster" :style="posterBg" />
+  <BSkeletonWrapper v-if="loading">
+    <BSkeletonImg no-aspect width="250" height="400">
+    </BSkeletonImg>
+  </BSkeletonWrapper>
+    <div v-else class="movie-item__poster" :style="posterBg" />
     <div class="movie-item__info-container">
       <div class="movie-item__info">
         <h3 class="movie-item__info-title">{{ movie.Title }}</h3>
@@ -23,6 +27,8 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex';
+
   export default {
     name: 'MovieItem',
     props: {
@@ -31,7 +37,23 @@
         required: true,
       },
     },
+    data() {
+      return {
+        loading: false,
+      }
+    },
+    watch: {
+      'isShowLoader': {
+        handler() {
+          this.loading = this.isShowLoader;
+          console.log(this.loading, 'loading');
+        },
+        deep: true,
+        immediate: true,
+      }
+    },
     computed: {
+      ...mapGetters(['isShowLoader']),
       posterBg() {
         return {
           'background-image': `url(${ this.movie.Poster })`,

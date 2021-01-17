@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import moviesStore from './modules/movies';
+import loaderStore from './modules/loader';
 
 Vue.use(Vuex);
 
@@ -9,7 +10,8 @@ const store = new Vuex.Store({
   mutations: {},
   actions: {},
   modules: {
-    moviesStore
+    moviesStore,
+    loaderStore,
   },
 });
 

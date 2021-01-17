@@ -2,13 +2,10 @@
   <BContainer>
     <h3 class="list-title">IMDB TOP-250</h3>
     <BRow>
-      <template v-if="isExist">
+      <template>
         <BCol cols="3" v-for="(movie, key) in list" :key="key">
           <MovieItem :movie="movie" @mouseover.native="onMouseOver(movie.Poster)" />
         </BCol>
-      </template>
-      <template v-else>
-        <div>Empty list</div>
       </template>
     </BRow>
   </BContainer>
@@ -29,11 +26,6 @@
     methods: {
       onMouseOver(poster) {
         this.$emit('changePoster', poster);
-      },
-    },
-    computed: {
-      isExist() {
-        return Boolean(Object.keys(this.list).length);
       },
     },
   };
