@@ -17,7 +17,7 @@
           </BButton>
         </div>
         <div class="col pl-2">
-          <BButton size="md" block variant="outline-light">
+          <BButton size="md" block variant="outline-light" @click="emitRemoveEvent">
             Remove
           </BButton>
         </div>
@@ -42,11 +42,18 @@
         loading: false,
       }
     },
+    methods: {
+      emitRemoveEvent() {
+        this.$emit('removeItem', {
+          id: this.movie.imdbID,
+          title: this.movie.Title
+        })
+      },
+    },
     watch: {
       'isShowLoader': {
         handler() {
           this.loading = this.isShowLoader;
-          console.log(this.loading, 'loading');
         },
         deep: true,
         immediate: true,

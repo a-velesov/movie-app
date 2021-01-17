@@ -4,7 +4,7 @@
     <BRow>
       <template>
         <BCol cols="3" v-for="(movie, key) in list" :key="key">
-          <MovieItem :movie="movie" @mouseover.native="onMouseOver(movie.Poster)" />
+          <MovieItem :movie="movie" @mouseover.native="onMouseOver(movie.Poster)" @removeItem="onRemoveItem" />
         </BCol>
       </template>
     </BRow>
@@ -13,6 +13,7 @@
 
 <script>
   import MovieItem from '@/components/MovieItem';
+  import { mapActions } from 'vuex';
 
   export default {
     name: 'MoviesList',
@@ -24,8 +25,15 @@
       },
     },
     methods: {
+      ...mapActions('moviesStore', [ 'removeMovie' ]),
       onMouseOver(poster) {
         this.$emit('changePoster', poster);
+      },
+      async onRemoveItem({ id, title }) {
+        const isConfirmed = await this.$bvModal.msgBoxConfirm(`Are you sure delete ${ title }?`);
+        if(isConfirmed) {
+          this.removeMovie(id);
+        }
       },
     },
   };
