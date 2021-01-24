@@ -8,10 +8,10 @@ import { mapGetters } from 'vuex';
 export default {
   name: 'Notification',
   computed: {
-    ...mapGetters(['getMessagePool'])
+    ...mapGetters([ 'getMessagePool' ]),
   },
   watch: {
-    getMessagePool: 'showNotification'
+    getMessagePool: 'showNotification',
   },
   methods: {
     showNotification({
