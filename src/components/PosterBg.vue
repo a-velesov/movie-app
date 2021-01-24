@@ -12,7 +12,7 @@ export default {
     },
   },
   data: () => ({
-    defaultPosterBg: 'linear-gradient(45deg,rgb(0, 3, 38) 0%,rgb(82, 15, 117) 100%)',
+    defaultPosterBg: 'linear-gradient(180deg, rgb(78, 7, 47) 0%, rgb(57, 0, 100) 92%)',
   }),
   computed: {
     posterStyle() {
